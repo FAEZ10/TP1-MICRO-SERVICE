@@ -100,10 +100,10 @@ We've provided a test script that verifies all aspects of the microservices arch
 
 ```bash
 # Make the script executable
-chmod +x test-microservices.sh
+chmod +x test.sh
 
 # Run the tests
-./test-microservices.sh
+./test.sh
 ```
 
 The test script performs the following checks:
