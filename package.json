@@ -1,0 +1,17 @@
+{
+  "name": "micro-services",
+  "version": "1.0.0",
+  "description": "Microservices for product catalogue and order management",
+  "scripts": {
+    "test": "./test.sh",
+    "test:catalogue": "cd catalogue-service && npm test",
+    "test:commande": "cd commande-service && npm test",
+    "install:all": "cd catalogue-service && npm install && cd ../commande-service && npm install",
+    "build:all": "cd catalogue-service && npm run build && cd ../commande-service && npm run build",
+    "start:dev": "docker compose up --build",
+    "start": "docker compose up",
+    "stop": "docker compose down"
+  },
+  "author": "",
+  "license": "ISC"
+}
