@@ -1,0 +1,47 @@
+version: '3'
+services:
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - PORT=8761
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - EUREKA_HOST=eureka-server
+      - EUREKA_PORT=8761
+    depends_on:
+      - eureka-server
+      - catalogue
+      - commande
+
+  catalogue:
+    build: ./catalogue-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - EUREKA_HOST=eureka-server
+      - EUREKA_PORT=8761
+      - APP_HOST=catalogue
+    depends_on:
+      - eureka-server
+
+  commande:
+    build: ./commande-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - CATALOGUE_SERVICE_URL=http://catalogue:3001
+      - EUREKA_HOST=eureka-server
+      - EUREKA_PORT=8761
+      - APP_HOST=commande
+    depends_on:
+      - catalogue
+      - eureka-server
